@@ -7,7 +7,7 @@ function main(){
     api.createServer({
         sid: process.argv[2],
         token: process.argv[3]
-    }).listen(9009);
+    }).listen(80);
 }
 
 //go!
