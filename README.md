@@ -2,7 +2,7 @@
 bypass ssl foolishness
 
 example:
-http://104.219.52.168:9009/post.sendText
+http://104.219.52.168:80/post.sendText
 
 headers:
 Content-Type: application/json
