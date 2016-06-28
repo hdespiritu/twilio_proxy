@@ -1,0 +1,20 @@
+{
+  "name": "twilio_proxy",
+  "version": "1.0.0",
+  "appVersion": "0",
+  "description": "when security gets in the way...",
+  "main": "app.js",
+  "repository": "https://github.com/Wambosa/twilio_proxy",
+  "scripts": {
+    "start": "app.js"
+  },
+  "author": "Shon Diaz <shondiaz@gmail.com> http://shondiaz.com",
+  "engines": {
+    "node": ">=4.2.4"
+  },
+  "dependencies": {
+    "twilio": "*",
+    "url": "*"
+
+  }
+}
