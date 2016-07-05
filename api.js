@@ -4,11 +4,13 @@ var url = require('url');
 var http = require('http');
 var twil = require('./src/twilio_service');
 var debug = require('./debug')({verbosity:1});
+var cal = require('./src/calendar_service');
 
 var actions = {
     "GET": {
         "get.test": testApi,
-        "get.help": getHelp
+        "get.help": getHelp,
+        "get.testICS": cal.getTestICS
     },
 
     "POST": {
