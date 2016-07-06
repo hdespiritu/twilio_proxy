@@ -16,16 +16,7 @@ var actions = {
 
     "POST": {
         "post.sendText": twil.sendTextToPhone,
-        "post.sendCalendar": cal.sendCalendar || function(options){
-            var phoneNumber = options.phoneNumber;
-            var text = options.plainText; //
-            var calArgs = options.calArgs; //
-            
-            var attachment = cal.generateCalendar(calArgs);
-            
-            //must be a promise
-            return twil.sendAttachmentToPhone(phoneNumber, text, attachment, 'calendar/text');
-        }
+        "post.sendCalendar": cal.sendCalendar
     }
 };
 
