@@ -38,5 +38,23 @@ module.exports = {
                 resolve(report);
             });
         });
+    },
+    
+    sendAttachmentToPhone: function(phoneNumber, plainText, attachment, mimeType){
+       
+        //todo: the client likely does not need to be recreated every send message. also lookup how to terminate session.
+        let client = new twilio.RestClient(accountSid, authToken)
+        return new Promise(function(resolve,reject){
+            client.messages.create({
+                body: plainText,
+                to: `+1${phoneNumber}`,
+                from: `+1${sendFrom}`,
+                media_url: attachment
+            }, function(err,message){
+                report.error = err;
+                report.info = message;
+                resolve(report);
+            });
+        });
     }
 };
