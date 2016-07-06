@@ -28,6 +28,7 @@ module.exports = {
         let client = new twilio.RestClient(accountSid, authToken);
 
         return new Promise(function (resolve, reject) {
+            
             client.messages.create({
                 body: plainText,
                 to: `+1${phoneNumber}`,
@@ -40,10 +41,21 @@ module.exports = {
         });
     },
     
-    sendAttachmentToPhone: function(phoneNumber, plainText, attachment, mimeType){
-       
+    sendAttachmentToPhone: function(options){
+        
+        let phoneNumber = options.phoneNumber;
+        let plainText = options.plainText;
+        let attachment = options.attachment;
+        let mimeType = options.mimeType;
+        
+        let report = {
+            error: null,
+            info: null
+        };
+        
         //todo: the client likely does not need to be recreated every send message. also lookup how to terminate session.
-        let client = new twilio.RestClient(accountSid, authToken)
+        let client = new twilio.RestClient(accountSid, authToken);
+        
         return new Promise(function(resolve,reject){
             client.messages.create({
                 body: plainText,
