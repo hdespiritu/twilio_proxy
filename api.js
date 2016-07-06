@@ -3,6 +3,7 @@
 var url = require('url');
 var http = require('http');
 var twil = require('./src/twilio_service');
+var cal = require('./src/calendar_service');
 var debug = require('./debug')({verbosity:1});
 
 var actions = {
@@ -12,7 +13,17 @@ var actions = {
     },
 
     "POST": {
-        "post.sendText": twil.sendTextToPhone
+        "post.sendText": twil.sendTextToPhone,
+        "post.sendCalendar": cal.sendCalendar || function(options){
+            var phoneNumber = options.phoneNumber;
+            var text = options.plainText; //
+            var calArgs = options.calArgs; //
+            
+            var attachment = cal.generateCalendar(calArgs);
+            
+            //must be a promise
+            return twil.sendAttachmentToPhone(phoneNumber, text, attachment, 'calendar/text');
+        }
     }
 };
 
