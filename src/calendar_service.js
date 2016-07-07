@@ -2,29 +2,26 @@ var twil = require('./twilio_service');
 var fs = require('fs');
 
 function sendCalendar(options){
-    return new Promise(function(resolve,reject){
-        fs.readFile(process.cwd() + '/data/testCalAPI.ics', 'utf8',function(err,data){
-            if(err){
-                console.log(err);
-            } 
-
-           
-            return resolve(data);
-        });
-    }).then(function(attachment){
-        
-        
-        return Promise.resolve({
-            phoneNumber: options.phoneNumber,
-            plainText: options.plainText,
-            attachment: attachment,
-            mimeType: "calendar/text"
-        });
-    }).then(twil.sendAttachmentToPhone);
+    return twil.sendAttachmentToPhone({
+        phoneNumber: options.phoneNumber,
+        plainText: options.plainText,
+        attachment: null,//todo: undo. this is hardcoded later
+        mimeType: "text/calendar"
+    });
 }
 
 function generateCalendar(){
-    
+    return  Promise.resolve(`BEGIN:VCALENDAR
+        VERSION:2.0
+        X-WR-CALNAME:Loan Payment Due
+        BEGIN:VEVENT
+        DTSTART:2016-05-01T00:00:00-05:00
+        DTEND:2016-08-01T00:00:00-05:00
+        SUMMARY:Loan Payment Due
+        DESCRIPTION:Please make sure to make the mininmum payment by the due date
+        RRULE:FREQ=MONTHLY;COUNT=3
+        END:VEVENT
+        END:VCALENDAR`);
 }
 
 module.exports = {

@@ -5,13 +5,13 @@ var http = require('http');
 var twil = require('./src/twilio_service');
 var cal = require('./src/calendar_service');
 var debug = require('./debug')({verbosity:1});
-var cal = require('./src/calendar_service');
 
 var actions = {
     "GET": {
         "get.test": testApi,
         "get.help": getHelp,
-        "get.testICS": cal.getTestICS
+        "get.testICS": cal.getTestICS,
+        "get.calendar": cal.generateCalendar
     },
 
     "POST": {
@@ -42,7 +42,7 @@ function httpHandler(request, response){
 
                 actions[method][actionName](apiHit.query)
                     .then(function(result){
-                        response.writeHead(200, { 'Content-Type': 'application/json' });
+                        response.writeHead(200, getHeader(actionName));
                         response.write(JSON.stringify(result));
                         response.end();
 
@@ -168,6 +168,18 @@ function getHelp() {
 function buildMethodList(){
     return Object.getOwnPropertyNames(actions.GET)
         .concat(Object.getOwnPropertyNames(actions.POST));
+}
+
+//todo: move somewhere else
+function getHeader(actionName){
+
+    let defaultHeader = {'Content-Type': 'application/json'};
+    let calendarHeader = {
+        'Content-Type': 'text/calendar',
+        'Content-Disposition': `filename="myUnDebtSchedule.ics"`
+    };
+
+    return actionName === "get.calendar" ? calendarHeader : defaultHeader;
 }
 
 function createServer(options){

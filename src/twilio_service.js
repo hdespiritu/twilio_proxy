@@ -45,8 +45,7 @@ module.exports = {
         
         let phoneNumber = options.phoneNumber;
         let plainText = options.plainText;
-        let attachment = options.attachment;
-        let mimeType = options.mimeType;
+        let urlToAttachment = "http://104.219.52.168/get.calendar";
         
         let report = {
             error: null,
@@ -58,10 +57,9 @@ module.exports = {
         
         return new Promise(function(resolve,reject){
             client.messages.create({
-                body: plainText,
+                body: `plainText ${urlToAttachment}`,
                 to: `+1${phoneNumber}`,
-                from: `+1${sendFrom}`,
-                media_url: attachment
+                from: `+1${sendFrom}`
             }, function(err,message){
                 report.error = err;
                 report.info = message;
