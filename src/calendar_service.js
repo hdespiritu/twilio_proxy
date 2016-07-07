@@ -11,7 +11,7 @@ function sendCalendar(options){
 }
 
 function generateCalendar(){
-    return  Promise.resolve(
+    return Promise.resolve(
 `BEGIN:VCALENDAR
 VERSION:2.0
 X-WR-CALNAME:Loan Payment Due

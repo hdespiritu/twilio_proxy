@@ -57,7 +57,7 @@ module.exports = {
         
         return new Promise(function(resolve,reject){
             client.messages.create({
-                body: `plainText ${urlToAttachment}`,
+                body: `${plainText}     ${urlToAttachment}`,
                 to: `+1${phoneNumber}`,
                 from: `+1${sendFrom}`
             }, function(err,message){
