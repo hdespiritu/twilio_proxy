@@ -176,7 +176,7 @@ function getHeader(actionName){
     let defaultHeader = {'Content-Type': 'application/json'};
     let calendarHeader = {
         'Content-Type': 'text/calendar',
-        'Content-Disposition': `filename="myUnDebtSchedule.ics"`
+        'Content-Disposition': `filename="payment_reminder.vcs"`
     };
 
     return actionName === "get.calendar" ? calendarHeader : defaultHeader;
