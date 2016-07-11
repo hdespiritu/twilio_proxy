@@ -175,8 +175,10 @@ function getHeader(actionName){
 
     let defaultHeader = {'Content-Type': 'application/json'};
     let calendarHeader = {
-        'Content-Type': 'application/octet-stream',
-        'Content-Disposition': `filename="payment_reminder.ics"`
+        "Content-Disposition":`attachment;filename=PaymentReminder.ics`,
+        "Content-Encoding": 'gzip',
+        "Content-Length": 455, //todo: ? might need this
+        "Content-Type": "text/calendar;charset=UTF-8"
     };
 
     return actionName === "get.calendar" ? calendarHeader : defaultHeader;
