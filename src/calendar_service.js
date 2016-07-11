@@ -6,7 +6,7 @@ function sendCalendar(options){
         phoneNumber: options.phoneNumber,
         plainText: options.plainText,
         attachment: null,//todo: undo. this is hardcoded later
-        mimeType: "application/octet-stream"
+        mimeType: "text/calendar"
     });
 }
 

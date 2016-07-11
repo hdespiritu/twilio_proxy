@@ -175,7 +175,7 @@ function getHeader(actionName){
 
     let defaultHeader = {'Content-Type': 'application/json'};
     let calendarHeader = {
-        'Content-Type': 'text/calendar',
+        'Content-Type': 'application/octet-stream',
         'Content-Disposition': `filename="payment_reminder.ics"`
     };
 
