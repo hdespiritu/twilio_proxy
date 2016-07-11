@@ -43,7 +43,7 @@ function httpHandler(request, response){
                 actions[method][actionName](apiHit.query)
                     .then(function(result){
                         response.writeHead(200, getHeader(actionName));
-                        response.write(JSON.stringify(result));
+                        response.write(result);
                         response.end();
 
                     })
